@@ -23,9 +23,11 @@ const Routes = () => {
 
       <Set wrap={BlogLayout}>
         <Route path="/blog-post/{id:Int}" page={BlogPostPage} name="blogPost" />
+        <Route path="/contact" page={ContactPage} name="contact" />
         <Route path="/about" page={AboutPage} name="about" prerender />
         <Route path="/" page={HomePage} name="home" prerender />
       </Set>
+
       <Route notfound page={NotFoundPage} />
     </Router>
   )
