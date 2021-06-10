@@ -7,10 +7,13 @@ import {
   Label,
   FormError,
 } from '@redwoodjs/forms'
-import { useForm } from 'react-hook-form'
-
 import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
+import { useForm } from 'react-hook-form'
+
+import ContactsCell from 'src/components/ContactsCell'
+
+import type { CreateContactMutation } from 'types/graphql'
 
 const CREATE_CONTACT = gql`
   mutation CreateContactMutation($input: CreateContactInput!) {
@@ -23,13 +26,16 @@ const CREATE_CONTACT = gql`
 
 const ContactPage = () => {
   const formMethods = useForm({ mode: 'onBlur' })
-  const [create, { loading, error }] = useMutation(CREATE_CONTACT, {
-    onCompleted: ({ createContact }) => {
-      const { name } = createContact
-      toast.success(`Thank you ${name} for your submission!`)
-      formMethods.reset()
-    },
-  })
+  const [create, { loading, error }] = useMutation<CreateContactMutation>(
+    CREATE_CONTACT,
+    {
+      onCompleted: ({ createContact }) => {
+        const { name } = createContact
+        toast.success(`Thank you ${name} for your submission!`)
+        formMethods.reset()
+      },
+    }
+  )
   const onSubmit = (data) => {
     create({ variables: { input: data } })
     console.log(data)
@@ -85,6 +91,9 @@ const ContactPage = () => {
         <FieldError name="message" className="error" />
         <Submit disabled={loading}>Save</Submit>
       </Form>
+      <hr />
+      <h1>Bisherige Anfragen</h1>
+      <ContactsCell />
     </>
   )
 }

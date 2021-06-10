@@ -133,6 +133,17 @@ export type BlogPostsQuery = (
   )> }
 );
 
+export type ContactsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ContactsQuery = (
+  { __typename?: 'Query' }
+  & { contacts: Array<(
+    { __typename?: 'Contact' }
+    & Pick<Contact, 'id' | 'name' | 'message' | 'createdAt'>
+  )> }
+);
+
 export type Find_Post_By_IdVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -206,6 +217,6 @@ export type CreateContactMutation = (
   { __typename?: 'Mutation' }
   & { createContact?: Maybe<(
     { __typename?: 'Contact' }
-    & Pick<Contact, 'id'>
+    & Pick<Contact, 'id' | 'name'>
   )> }
 );
