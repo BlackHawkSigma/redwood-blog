@@ -1,6 +1,16 @@
 import { Link, routes } from '@redwoodjs/router'
 
-const BlogPost: React.FunctionComponent = ({ post }) => {
+type BlogPostProps = {
+  post: {
+    id: number
+    title: string
+    body: string
+    /** Date */
+    createdAt: string
+  }
+}
+
+const BlogPost = ({ post }: BlogPostProps) => {
   return (
     <article key={post.id}>
       <header>
@@ -9,7 +19,7 @@ const BlogPost: React.FunctionComponent = ({ post }) => {
         </h2>
       </header>
       <p>{post.body}</p>
-      <div>Posted at: {new Date(post.createdAt).toLocaleString()}</div>
+      <div>Posted at: {new Date(post.createdAt).toLocaleString('en-US')}</div>
     </article>
   )
 }
