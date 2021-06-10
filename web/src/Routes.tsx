@@ -28,7 +28,7 @@ const Routes = () => {
         <Route path="/" page={HomePage} name="home" prerender />
       </Set>
 
-      <Route notfound page={NotFoundPage} />
+      <Route notfound page={NotFoundPage} prerender />
     </Router>
   )
 }
